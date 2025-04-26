@@ -60,7 +60,7 @@ export default function Home() {
               Visualize your data with real-time charts and metrics
             </p>
             <Link
-              href="/dashboard"  // Changed from /login to /dashboard
+              href="/login"  
               className="inline-block px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-all duration-300 transform hover:scale-105"
             >
               Get Started

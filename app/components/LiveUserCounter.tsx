@@ -1,39 +1,14 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useWebSocket } from '@/app/context/WebSocketContext'
 
 export default function LiveUserCounter() {
-  const [count, setCount] = useState(0)
-  const [isConnected, setIsConnected] = useState(false)
-
-  useEffect(() => {
-    // Simulate WebSocket connection
-    const ws = new WebSocket('ws://localhost:3001')
-
-    ws.onopen = () => {
-      setIsConnected(true)
-    }
-
-    ws.onmessage = (event) => {
-      const data = JSON.parse(event.data)
-      if (data.type === 'userCount') {
-        setCount(data.count)
-      }
-    }
-
-    ws.onclose = () => {
-      setIsConnected(false)
-    }
-
-    return () => {
-      ws.close()
-    }
-  }, [])
+  const { userCount, isConnected } = useWebSocket()
 
   return (
     <div className="flex items-center space-x-2">
-      <span className="text-sm font-medium">
-        Live Users: <span className="font-bold">{count}</span>
+      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+        Live Users: <span className="font-bold">{userCount}</span>
       </span>
       <span
         className={`h-2 w-2 rounded-full ${
